@@ -1,0 +1,25 @@
+using namespace vex;
+extern brain Brain;
+
+extern motor FrontL;
+extern motor BackL;
+extern motor MiddleL;
+extern motor FrontR;
+extern motor MiddleR;
+extern motor BackR;
+extern rotation rotate;
+extern controller Controller1;
+extern motor clampB;
+extern motor clampF;
+extern controller Controller2;
+extern inertial inertR;
+extern inertial inert;
+extern motor armF;
+extern motor armB;
+extern motor intake;
+extern motor_group leftDrive;
+extern motor_group rightDrive;
+extern pneumatics armFP;
+extern pneumatics armBP;
+extern pneumatics flip;
+void vexcodeInit(void);

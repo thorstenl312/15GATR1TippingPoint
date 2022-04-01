@@ -49,7 +49,6 @@ void forwardPIDFAST(float pos, int maxPower, int tim) {
     if(speed < 0 && (fabs(error-pos) < 100 || error < 30)) speed = 0;
     if(error < pos/2.4 && FrontL.velocity(rpm)>90) speed=FrontL.velocity(rpm)-60;
     if(error < pos/2.4 && (fabs(FrontL.velocity(rpm)) < 120 || speed < 120)) speed = 120;
-    if(error < 170) flip.open();
 		rightDrive.spin(forward, speed, rpm); //Give Power to Motors
     leftDrive.spin(forward, speed, rpm);
 		lasterror = error;

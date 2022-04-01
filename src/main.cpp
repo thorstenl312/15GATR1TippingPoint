@@ -26,7 +26,6 @@ void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   inert.calibrate();
-  inertR.calibrate();
   while(inert.isCalibrating());
   rotate.resetPosition();
   std::cout << "Done Calibrating" << std::endl;
@@ -43,54 +42,80 @@ void autonomous(void) {
 
 void usercontrol(void) {
   // User control code here, inside the loop
-  armF.setStopping(hold);
-  armB.setStopping(hold);
-  clampF.setStopping(hold);
-  clampB.setStopping(hold);
-  //task cc(clampControl);
+  int frontPos = 0;
+  int backPos = 2;
+  clawBack.open();
+  clawFront.open();
   while (true) {
-    armBP.close();
-    armFP.open();
     float curvedY = (float)Controller1.Axis3.position(pct);
     float curvedX = (float)Controller1.Axis4.position(pct);
+    if(fabs(Controller1.Axis2.position(pct))> 5) flip.spin(fwd, -Controller1.Axis2.position(pct), pct);
+    else flip.stop(hold);
     if(fabs(curvedX) < 10) curvedX = 0;
     if(fabs(curvedY) < 10) curvedY = 0;
     leftDrive.spin(fwd, curvedY + (curvedX*0.3), pct);
     rightDrive.spin(fwd, curvedY - (curvedX*0.3), pct);
-    intake.spin(fwd, Controller2.ButtonA.pressing() * 100 + Controller2.ButtonB.pressing() * -100, pct);
-    if(abs(Controller1.Axis2.position(pct)) > 5){
-      armF.spin(fwd, Controller1.Axis2.position(pct), pct);
-    }
-    else{
-      armF.stop(hold);
-    }
-    if(abs(Controller2.Axis3.position(pct)) > 5){
-      armB.spin(fwd, Controller2.Axis3.position(pct), pct);
-    }
-    else{
-      armB.stop(hold);
-    }
-    if(Controller2.ButtonL2.pressing()){
-      flip.set(!flip.value());
-      while(Controller2.ButtonL2.pressing());
+    if(Controller1.ButtonL1.pressing()){
+      clawFront.set(!clawFront.value());
+      while(Controller1.ButtonL1.pressing());
     }
     if(Controller1.ButtonR2.pressing()){
-      clampF.spin(fwd, 100, pct);
+      if(frontPos == 0){
+        clawLiftBackL.close();
+        clawLiftBackR.close();
+        frontPos = 1;
+      }
+      else if(frontPos == 1){
+        clawLiftBackL.open();
+        clawLiftBackR.open();
+        frontPos = 2;
+      }
+      else{
+        clawLiftBackL.open();
+        clawLiftBackR.close();
+        frontPos = 0;
+      }
+      while(Controller1.ButtonR2.pressing());
     }
-    else if(Controller1.ButtonR1.pressing()){
-      clampF.spin(reverse, 100, pct);
+    if(Controller1.ButtonR1.pressing()){
+      clawBack.set(!clawBack.value());
+      while(Controller1.ButtonR1.pressing());
+    }
+    if(Controller1.ButtonL2.pressing()){
+      if(backPos == 0){
+        clawLiftFrontL.close();
+        clawLiftFrontR.open();
+        backPos = 1;
+      }
+      else if(backPos == 1){
+        clawLiftFrontL.open();
+        clawLiftFrontR.close();
+        backPos = 2;
+      }
+      else{
+        clawLiftFrontL.open();
+        clawLiftFrontR.open();
+        backPos = 0;
+      }
+      while(Controller1.ButtonL2.pressing());
+    }
+    if(Controller2.ButtonR1.pressing()){
+      intakeB.spin(fwd, 100, pct);
+    }
+    else if(Controller2.ButtonR2.pressing()){
+      intakeB.spin(reverse, 100, pct);
     }
     else{
-      clampF.stop(hold);
+      intakeB.stop(coast);
     }
-    if(Controller2.ButtonR2.pressing()){
-      clampB.spin(fwd, 100, pct);
+    if(Controller2.ButtonL1.pressing()){
+      intakeF.spin(fwd, 100, pct);
     }
-    else if(Controller2.ButtonR1.pressing()){
-      clampB.spin(reverse, 100, pct);
+    else if(Controller2.ButtonL2.pressing()){
+      intakeF.spin(reverse, 100, pct);
     }
     else{
-      clampB.stop(hold);
+      intakeF.stop(coast);
     }
     wait(20, msec); // Sleep the task for a short amount of time to
   }

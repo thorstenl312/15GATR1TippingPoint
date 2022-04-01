@@ -11,12 +11,12 @@ void driveIntoWall(int maxSpeed, int accel){
   rotate.resetPosition();
   double startPos = rotate.position(deg);
   double pastPos = 0;
-  leftDrive.spin(reverse, maxSpeed*0.95, rpm);
+  leftDrive.spin(reverse, maxSpeed*0.8, rpm);
   rightDrive.spin(reverse, maxSpeed, rpm);
   wait(200,msec);
   speed = (fabs(leftDrive.velocity(rpm))+fabs(rightDrive.velocity(rpm))) / 2;
   while(fabs(pastPos - rotate.position(deg)) > 1 || fabs(startPos - rotate.position(deg)) < 500 ){
-    leftDrive.spin(reverse, speed*0.95, rpm);
+    leftDrive.spin(reverse, speed*0.8, rpm);
     rightDrive.spin(reverse, speed, rpm);
     speed += 80;
     if(speed > maxSpeed)

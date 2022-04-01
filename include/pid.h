@@ -9,9 +9,9 @@
 #define kiT 0.08
 
 void forwardPIDFAST(float pos, int maxPower = 600, int tim = 50);
-void forwardPID(float pos, int maxPower = 400, int tim = 50, float decel = 1.9, int lowSpeed = 40, bool closeEarly = false, int closer = 400);
+void forwardPID(float pos, int maxPower = 400, int tim = 50, float decel = 2.4, int lowSpeed = 40, bool closeEarly = false, int closer = 400);
 void forwardPID2(float pos, int maxPower = 430, int tim = 50);
-void backwardPID(float pos, int maxPower = 470, int tim = 50, float decel = 2, int lowSpeed = 70);
+void backwardPID(float pos, int maxPower = 400, int tim = 50, float decel = 2, int lowSpeed = 40);
 void backwardPIDARC(float pos, int maxPower = 470, int tim = 50, float decel = 2, int lowSpeed = 70);
 void backwardPID2(float pos, int maxPower = 430, int tim = 50);
 void turnLeft(float pos, int maxSpeed = 370, int tim = 50);

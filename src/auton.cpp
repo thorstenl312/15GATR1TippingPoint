@@ -6,13 +6,53 @@
 void matchAuto(){
   Brain.resetTimer();
   flip.spin(reverse, 40, pct);
-  leftDrive.spin(fwd, 90, pct);
-  rightDrive.spin(fwd, 90, pct);
-  wait(100,msec);
+  //original 90 not 100
+
+  clawLiftBackL.close();
+  clawLiftBackR.close();
+  clawBack.close();
+  backwardPID(1600, 450, 50, 3);
+  //leftDrive.spin(fwd, 90, pct);
+  //rightDrive.spin(fwd, 90, pct);
+  //without arm
+  
+  //100s
+  clawBack.open();
+  wait(0.15, sec);
+  clawLiftBackL.open();
+  clawLiftBackR.open();
+  leftDrive.spin(forward, 60, pct);
+  rightDrive.spin(forward, 100, pct);
+  wait(1.25, sec);
+  stopDrive(brake);
+  leftDrive.spin(forward, 60, pct);
+  wait(0.5, sec);
+  backwardPID(600);
+  wait(500,msec);
+  forwardPID(600);
+  wait(500,msec);
+  backwardPID(600);
+  wait(500,msec);
+  forwardPID(600);
+  wait(500,msec);
+  backwardPID(600);
+  wait(500,msec);
+  forwardPID(600);
+  wait(500,msec);
+  backwardPID(600);
+  wait(500,msec);
+  forwardPID(600);
+  wait(500,msec);
+  /*
+  
+
   flip.spin(fwd, 100, pct);
   wait(450,msec);
   stopDrive(coast);
   flip.stop(hold);
+
+
+
   wait(200,msec);
   leftDrive.spin(reverse, 30, pct);
   rightDrive.spin(reverse, 30, pct);
@@ -52,6 +92,7 @@ void matchAuto(){
   forwardPID(650);
   turnRight(88, 300);
   forwardPID(1000);
+  */
 }
  
 void testSkills(){

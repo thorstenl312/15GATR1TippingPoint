@@ -20,7 +20,7 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
-bool skillsB = true;
+bool skillsB = false;
 
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
@@ -81,11 +81,11 @@ void usercontrol(void) {
     if(fabs(curvedY) < 10) curvedY = 0;
     leftDrive.spin(fwd, curvedY + (curvedX*0.3), pct);
     rightDrive.spin(fwd, curvedY - (curvedX*0.3), pct);
-    if(Controller1.ButtonL1.pressing()){
+    if(Controller1.ButtonR1.pressing()){
       clawFront.set(!clawFront.value());
-      while(Controller1.ButtonL1.pressing());
+      while(Controller1.ButtonR1.pressing());
     }
-    if(Controller1.ButtonR2.pressing()){
+    if(Controller1.ButtonL2.pressing()){
       if(frontPos == 0){
         clawLiftBackL.close();
         clawLiftBackR.close();
@@ -101,13 +101,13 @@ void usercontrol(void) {
         clawLiftBackR.close();
         frontPos = 0;
       }
-      while(Controller1.ButtonR2.pressing());
+      while(Controller1.ButtonL2.pressing());
     }
-    if(Controller1.ButtonR1.pressing()){
+    if(Controller1.ButtonL1.pressing()){
       clawBack.set(!clawBack.value());
-      while(Controller1.ButtonR1.pressing());
+      while(Controller1.ButtonL1.pressing());
     }
-    if(Controller1.ButtonL2.pressing()){
+    if(Controller1.ButtonR2.pressing()){
       if(backPos == 0){
         clawLiftFrontL.close();
         clawLiftFrontR.open();
@@ -123,7 +123,7 @@ void usercontrol(void) {
         clawLiftFrontR.open();
         backPos = 0;
       }
-      while(Controller1.ButtonL2.pressing());
+      while(Controller1.ButtonR2.pressing());
     }
     if(Controller2.ButtonR1.pressing()){
       intakeB.spin(fwd, 100, pct);

@@ -20,19 +20,15 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
+<<<<<<< HEAD
 bool skillsB = false;
+=======
+int autoSelect = 2;
+>>>>>>> parent of 9a1b97f (code)
 
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
-  clawBack.open();
-  clawFront.open();
-  clawLiftFrontL.open();
-  clawLiftFrontR.close();
-  clawLiftBackL.open();
-  clawLiftBackR.open();
   vexcodeInit();
-  inert.calibrate();
-  while(inert.isCalibrating());
   inert.calibrate();
   while(inert.isCalibrating());
   rotate.resetPosition();
@@ -43,8 +39,8 @@ void pre_auton(void) {
 }
 
 void autonomous(void) {
-  if(skillsB) skill();
-  matchAuto();
+  //matchAuto();
+  skills();
 }
 
 
@@ -52,26 +48,8 @@ void usercontrol(void) {
   // User control code here, inside the loop
   int frontPos = 0;
   int backPos = 2;
-  if(skillsB){
-    clawLiftFrontL.close();
-    clawLiftFrontR.open();
-    clawLiftBackL.close();
-    clawLiftBackR.close();
-    clawBack.close();
-    clawFront.close();
-    forwardPID(150, 300);
-    clawFront.open();
-    clawLiftFrontL.open();
-    clawLiftFrontR.close();
-  }
-  else{
-    clawLiftFrontL.close();
-    clawLiftFrontR.open();
-    clawFront.close();
-    clawBack.open();
-    clawLiftBackL.open();
-    clawLiftBackR.open();
-  }
+  clawBack.open();
+  clawFront.open();
   while (true) {
     float curvedY = (float)Controller1.Axis3.position(pct);
     float curvedX = (float)Controller1.Axis4.position(pct);

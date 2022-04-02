@@ -4,6 +4,7 @@
 #include <iostream>
 
 void matchAuto(){
+<<<<<<< HEAD
   Brain.resetTimer();
   flip.spin(reverse, 40, pct);
   //original 90 not 100
@@ -49,8 +50,16 @@ void matchAuto(){
 
   flip.spin(fwd, 100, pct);
   wait(450,msec);
+=======
+  flip.spin(fwd, 40, pct);
+  leftDrive.spin(fwd, 100, pct);
+  rightDrive.spin(fwd, 100, pct);
+  wait(670,msec);
+>>>>>>> parent of 9a1b97f (code)
   stopDrive(coast);
+  wait(50,msec);
   flip.stop(hold);
+<<<<<<< HEAD
 
 
 
@@ -65,9 +74,13 @@ void matchAuto(){
   rightDrive.stop(hold);
   wait(350, msec);
   stopDrive(coast);
+=======
+  driveIntoWall(400, 60);
+>>>>>>> parent of 9a1b97f (code)
   flip.spin(reverse, 50, pct);
-  forwardPID(80, 200);
+  wait(250,msec);
   flip.stop(hold);
+<<<<<<< HEAD
   turnLeft(-90, 220);
   clawLiftBackL.close();
   clawLiftBackR.close();
@@ -94,6 +107,8 @@ void matchAuto(){
   turnRight(88, 300);
   forwardPID(1000);
   */
+=======
+>>>>>>> parent of 9a1b97f (code)
 }
  
 void testSkills(){

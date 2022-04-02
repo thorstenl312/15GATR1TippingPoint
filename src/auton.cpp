@@ -11,7 +11,7 @@ void matchAuto(){
   clawLiftBackL.close();
   clawLiftBackR.close();
   clawBack.close();
-  backwardPID(1600, 450, 50, 3);
+  backwardPID(1600, 500, 50, 3);
   //leftDrive.spin(fwd, 90, pct);
   //rightDrive.spin(fwd, 90, pct);
   //without arm
@@ -24,10 +24,11 @@ void matchAuto(){
   leftDrive.spin(forward, 60, pct);
   rightDrive.spin(forward, 100, pct);
   wait(1.25, sec);
+  intakeB.spin(fwd, 100, pct);
   stopDrive(brake);
   leftDrive.spin(forward, 60, pct);
   wait(0.5, sec);
-  backwardPID(600);
+  backwardPID(700);
   wait(500,msec);
   forwardPID(600);
   wait(500,msec);

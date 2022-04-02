@@ -44,7 +44,7 @@ void forwardPIDFAST(float pos, int maxPower, int tim) {
 		float derivative = error - lasterror;
 		float P = error * kp*2, D = derivative * kd, I = totalerror * ki * 0;
     speed=P+I+D;
-    if((speed-fabs(FrontL.velocity(rpm)))>=pow(FrontL.velocity(rpm),2) && error>100) speed=70+fabs(pow(FrontL.velocity(rpm),2)); //Acceleration
+    if((speed-fabs(FrontL.velocity(rpm)))>=pow(FrontL.velocity(rpm),1.5) && error>100) speed=50+fabs(pow(FrontL.velocity(rpm),1.5)); //Acceleration
     if(speed>=maxPower)speed=maxPower;
     if(speed < 0 && (fabs(error-pos) < 100 || error < 30)) speed = 0;
     if(error < pos/2.4 && FrontL.velocity(rpm)>90) speed=FrontL.velocity(rpm)-60;
@@ -131,7 +131,7 @@ void backwardPID(float pos, int maxPower, int tim, float decel, int lowSpeed) {
 		else totalerror = 0;
 		//Calculation for the P, I, D terms
 		float derivative = error - lasterror;
-		float P = error * kp, D = derivative * kd, I = totalerror * ki;
+		float P = error * kp * 1.1, D = derivative * kd, I = totalerror * ki;
     speed=P+I+D;
     if((speed-fabs(FrontL.velocity(rpm)))>=pow(fabs(FrontL.velocity(rpm)),1.2) && error>100) speed=40+pow(fabs(FrontL.velocity(rpm)),1.2); //Acceleration 
     if(speed>=maxPower)speed=maxPower;
@@ -199,7 +199,7 @@ void turnLeft(float pos, int maxPower, int tim) {
     rightDrive.spin(forward, Power, rpm); //Give Power to Motors
     leftDrive.spin(reverse, Power, rpm);
 		lasterror = error;
-    if(error>1.5) t = 0;
+    if(error>1) t = 0;
     t += 15;
 		wait(15, msec);
 	}
@@ -227,7 +227,7 @@ void turnRight(float pos, int maxPower, int tim) {
 		rightDrive.spin(reverse, Power, rpm); //Give Power to Motors
     leftDrive.spin(forward, Power, rpm);
 		lasterror = error;
-    if(error>1.5) t = 0;
+    if(error>1) t = 0;
     t += 15;
 		wait(15, msec);
 	}

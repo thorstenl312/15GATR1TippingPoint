@@ -5,3 +5,4 @@ void stopDrive(brakeType b);
 int clampControl();
 int armDeploy();
 void driveIntoWall(int maxSpeed, int accel);
+int gripperControl();

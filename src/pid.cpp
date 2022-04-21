@@ -42,9 +42,9 @@ void forwardPIDFAST(float pos, int maxPower, int tim) {
 		else totalerror = 0;
 		//Calculation for the P, I, D terms
 		float derivative = error - lasterror;
-		float P = error * kp*2, D = derivative * kd, I = totalerror * ki * 0;
+		float P = error * kp*1.5, D = derivative * kd, I = totalerror * ki * 0;
     speed=P+I+D;
-    if((speed-fabs(FrontL.velocity(rpm)))>=pow(FrontL.velocity(rpm),1.5) && error>100) speed=50+fabs(pow(FrontL.velocity(rpm),1.5)); //Acceleration
+    if((speed-fabs(FrontL.velocity(rpm)))>=pow(FrontL.velocity(rpm),1.4) && error>100) speed=60+fabs(pow(FrontL.velocity(rpm),1.4)); //Acceleration
     if(speed>=maxPower)speed=maxPower;
     if(speed < 0 && (fabs(error-pos) < 100 || error < 30)) speed = 0;
     if(error < pos/2.4 && FrontL.velocity(rpm)>90) speed=FrontL.velocity(rpm)-60;

@@ -25,5 +25,5 @@ extern pneumatics clawLiftFrontR;
 extern pneumatics clawLiftBackL;
 extern motor flip;
 extern distance orangeDist;
-extern optical blueOpitcal;
+extern distance blueDist;
 void vexcodeInit(void);

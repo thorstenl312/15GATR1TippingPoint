@@ -5,29 +5,33 @@
 
 void matchAuto(){
   Brain.resetTimer();
-  flip.spin(reverse, 40, pct);
+  //flip.spin(reverse, 40, pct);
   //original 90 not 100
 
-  clawLiftBackL.close();
-  clawLiftBackR.close();
-  clawBack.close();
-  backwardPID(1600, 450, 50, 3);
+  clawLiftFrontL.close();
+  clawLiftFrontR.open();
+  clawFront.close();
+  forwardPIDFAST(1370);
+  stopDrive(coast);
   //leftDrive.spin(fwd, 90, pct);
   //rightDrive.spin(fwd, 90, pct);
   //without arm
   
   //100s
-  clawBack.open();
+  clawFront.open();
+  wait(0.1, sec);
+  clawLiftFrontL.open();
+  clawLiftFrontR.close();
+  stopDrive(coast);
   wait(0.15, sec);
-  clawLiftBackL.open();
-  clawLiftBackR.open();
-  leftDrive.spin(forward, 60, pct);
-  rightDrive.spin(forward, 100, pct);
-  wait(1.25, sec);
+  driveIntoWall(450, 60);
   stopDrive(brake);
-  leftDrive.spin(forward, 60, pct);
+  leftDrive.spin(reverse, 70, pct);
   wait(0.5, sec);
-  backwardPID(600);
+  forwardPID(80);
+  turnLeft(inert.rotation()-70);
+  /*intakeB.spin(fwd, 100, pct);
+  backwardPID(700);
   wait(500,msec);
   forwardPID(600);
   wait(500,msec);
@@ -42,7 +46,7 @@ void matchAuto(){
   backwardPID(600);
   wait(500,msec);
   forwardPID(600);
-  wait(500,msec);
+  wait(500,msec);*/
   /*
   
 

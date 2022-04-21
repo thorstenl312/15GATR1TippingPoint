@@ -43,7 +43,7 @@ void pre_auton(void) {
 }
 
 void autonomous(void) {
-  if(skillsB) skill();
+  if(skillsB) skills();
   matchAuto();
 }
 

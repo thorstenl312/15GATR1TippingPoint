@@ -5,32 +5,29 @@
 
 void matchAuto(){
   Brain.resetTimer();
-  //flip.spin(reverse, 40, pct);
+  flip.spin(reverse, 40, pct);
   //original 90 not 100
 
-  clawLiftFrontL.close();
-  clawLiftFrontR.open();
-  clawFront.close();
-  forwardPIDFAST(1370);
-  stopDrive(coast);
+  clawLiftBackL.close();
+  clawLiftBackR.close();
+  clawBack.close();
+  backwardPID(1600, 500, 50, 3);
   //leftDrive.spin(fwd, 90, pct);
   //rightDrive.spin(fwd, 90, pct);
   //without arm
   
   //100s
-  clawFront.open();
-  wait(0.1, sec);
-  clawLiftFrontL.open();
-  clawLiftFrontR.close();
-  stopDrive(coast);
+  clawBack.open();
   wait(0.15, sec);
-  driveIntoWall(450, 60);
+  clawLiftBackL.open();
+  clawLiftBackR.open();
+  leftDrive.spin(forward, 60, pct);
+  rightDrive.spin(forward, 100, pct);
+  wait(1.25, sec);
+  intakeB.spin(fwd, 100, pct);
   stopDrive(brake);
-  leftDrive.spin(reverse, 70, pct);
+  leftDrive.spin(forward, 60, pct);
   wait(0.5, sec);
-  forwardPID(80);
-  turnLeft(inert.rotation()-70);
-  /*intakeB.spin(fwd, 100, pct);
   backwardPID(700);
   wait(500,msec);
   forwardPID(600);
@@ -46,14 +43,22 @@ void matchAuto(){
   backwardPID(600);
   wait(500,msec);
   forwardPID(600);
-  wait(500,msec);*/
+  wait(500,msec);
   /*
   
 
   flip.spin(fwd, 100, pct);
   wait(450,msec);
+=======
+  flip.spin(fwd, 40, pct);
+  leftDrive.spin(fwd, 100, pct);
+  rightDrive.spin(fwd, 100, pct);
+  wait(670,msec);
+>>>>>>> parent of 9a1b97f (code)
   stopDrive(coast);
+  wait(50,msec);
   flip.stop(hold);
+<<<<<<< HEAD
 
 
 
@@ -68,9 +73,13 @@ void matchAuto(){
   rightDrive.stop(hold);
   wait(350, msec);
   stopDrive(coast);
+=======
+  driveIntoWall(400, 60);
+>>>>>>> parent of 9a1b97f (code)
   flip.spin(reverse, 50, pct);
-  forwardPID(80, 200);
+  wait(250,msec);
   flip.stop(hold);
+<<<<<<< HEAD
   turnLeft(-90, 220);
   clawLiftBackL.close();
   clawLiftBackR.close();
@@ -97,6 +106,8 @@ void matchAuto(){
   turnRight(88, 300);
   forwardPID(1000);
   */
+=======
+>>>>>>> parent of 9a1b97f (code)
 }
  
 void testSkills(){

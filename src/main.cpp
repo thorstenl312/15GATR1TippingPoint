@@ -20,7 +20,7 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
-bool skillsB = false;
+bool skillsB = true;
 
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
@@ -44,7 +44,7 @@ void pre_auton(void) {
 
 void autonomous(void) {
   if(skillsB) skills();
-  matchAuto();
+  else matchAuto();
 }
 
 

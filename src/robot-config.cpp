@@ -28,7 +28,7 @@ controller Controller1 = controller(primary);
 controller Controller2 = controller(partner);
 rotation rotate = rotation(PORT8, false);
 inertial inert = inertial(PORT7);
-distance orangeDist = distance(PORT1);
+distance orangeDist = distance(PORT2);
 distance blueDist = distance(PORT9);
 
 void vexcodeInit(void) {

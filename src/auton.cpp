@@ -106,8 +106,6 @@ void matchAuto(){
   turnRight(88, 300);
   forwardPID(1000);
   */
-=======
->>>>>>> parent of 9a1b97f (code)
 }
  
 void testSkills(){

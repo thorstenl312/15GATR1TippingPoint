@@ -42,7 +42,7 @@ int gripperControl(){
         frontPos = 1;
 
       }
-      else if(orangeDist.isObjectDetected() && orangeDist.objectDistance(distanceUnits::cm) < 1 && frontPos == 1){
+      else if(orangeDist.isObjectDetected() && orangeDist.objectDistance(distanceUnits::cm) < 3 && frontPos == 1){
         clawLiftBackL.open();
         clawLiftBackR.open();
         wait(0.35, sec);
@@ -68,7 +68,7 @@ int gripperControl(){
         clawLiftFrontR.close();
         backPos = 1;
       }
-      else if(blueDist.isObjectDetected() && blueDist.objectDistance(distanceUnits::cm) < 1 && backPos == 1){
+      else if(blueDist.isObjectDetected() && blueDist.objectDistance(distanceUnits::cm) < 3 && backPos == 1){
         clawLiftFrontL.open();
         clawLiftFrontR.open();
         wait(0.35, sec);

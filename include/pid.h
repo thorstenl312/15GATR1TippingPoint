@@ -1,10 +1,10 @@
 #pragma once
 #include "functions.h"
 #include "math.h"
-#define kp 0.6
+#define kp 0.53
 #define kd 0.27
 #define ki 0.05
-#define kpT 3.9
+#define kpT 3.6
 #define kdT 0.6
 #define kiT 0.08
 

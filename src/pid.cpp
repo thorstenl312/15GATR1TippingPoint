@@ -194,7 +194,7 @@ void turnLeft(float pos, int maxPower, int tim) {
     Power=P+I+D;
     if(maxPower < 20) maxPower = 20;
     if(Power<0 && (fabs(error-pos) < 5 || error < 1)) Power = 0;
-    if((Power-fabs(FrontL.velocity(rpm))) >= 40 && error > initialError*0.5) Power=fabs(FrontL.velocity(rpm)) + 40; //Acceleration 
+    if((Power-fabs(FrontL.velocity(rpm))) >= 40 && error > initialError*0.6) Power=fabs(FrontL.velocity(rpm)) + 40; //Acceleration 
     if(Power>maxPower)Power=maxPower;
     rightDrive.spin(forward, Power, rpm); //Give Power to Motors
     leftDrive.spin(reverse, Power, rpm);
@@ -222,7 +222,7 @@ void turnRight(float pos, int maxPower, int tim) {
     Power=P+I+D;
     if(maxPower < 20) maxPower = 20;
     if(Power<0 && (fabs(error-pos) < 5 || error < 1)) Power = 0;
-    if((Power-fabs(FrontL.velocity(rpm))) >= 40 && error > initialError*0.5) Power=fabs(FrontL.velocity(rpm)) + 40; //Acceleration 
+    if((Power-fabs(FrontL.velocity(rpm))) >= 40 && error > initialError*0.6) Power=fabs(FrontL.velocity(rpm)) + 40; //Acceleration 
     if(Power>maxPower)Power=maxPower;
 		rightDrive.spin(reverse, Power, rpm); //Give Power to Motors
     leftDrive.spin(forward, Power, rpm);

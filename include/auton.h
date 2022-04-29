@@ -1,5 +1,6 @@
 #pragma once
 #include "pid.h"
 
-void matchAuto();
+void sideAuto();
+void middleAuto();
 void testSkills();

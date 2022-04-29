@@ -1,36 +1,58 @@
 #include "auton.h"
 #include <iostream>
 
+
+int fixIntake(){
+  intakeB.spin(fwd, 100,pct);
+  intakeF.spin(fwd, 100, pct);
+  wait(500,msec);
+  while(true){
+    intakeB.spin(fwd, 100,pct);
+    intakeF.spin(fwd, 100, pct);
+    if(intakeB.velocity(pct) < 5){
+      intakeB.spin(reverse,50,pct);
+      wait(350,msec);
+      intakeB.spin(fwd, 100, pct);
+      wait(1000,msec);
+    }
+    if(intakeF.velocity(pct) < 5){
+      intakeF.spin(reverse,50,pct);
+      wait(350,msec);
+      intakeF.spin(fwd, 100, pct);
+      wait(1000,msec);
+    }
+  }
+}
 void skills(){
+  Brain.resetTimer();
   clawFront.close();
   clawBack.close();
-  clawLiftBackL.open();
-  clawLiftBackR.close();
   clawLiftFrontL.close();
   clawLiftFrontR.open();
-  
-  wait(1000,msec);
-  while(!blueDist.isObjectDetected() || blueDist.objectDistance(distanceUnits::cm) > 3){
-    leftDrive.spin(fwd, 15, pct);
-    rightDrive.spin(fwd, 15, pct);
+  wait(400,msec);
+  while(!blueDist.isObjectDetected() || blueDist.objectDistance(distanceUnits::cm) > 4){
+    leftDrive.spin(fwd, 10, pct);
+    rightDrive.spin(fwd, 10, pct);
   }
   stopDrive(coast);
   clawFront.open();
-  wait(250,msec);
+  wait(150,msec);
   clawLiftFrontL.open();
   clawLiftFrontR.close();
   while(inert.rotation() <= 83){
     leftDrive.spin(reverse, 7, pct);
-    rightDrive.spin(reverse, 20, pct);
+    rightDrive.spin(reverse, 22 , pct);
     if(inert.rotation() > 25)intakeF.spin(fwd,100, pct);
   }
   stopDrive(hold);
-  intakeF.spin(fwd,100, pct);
-  backwardPID(2300, 200, 50, 4.3);
-  turnRight(112, 200);
-  backwardPID(930, 200, 50, 4);
-  turnLeft(1, 200);
-  while(!orangeDist.isObjectDetected() || orangeDist.objectDistance(distanceUnits::cm) > 3){
+  task f(fixIntake);
+  backwardPID(2350, 130, 50, 1.5);
+  turnRight(112, 150);
+  backwardPID(905, 200, 50, 4);
+  clawLiftBackL.open();
+  clawLiftBackR.close();
+  turnLeft(0, 200,30);
+  while(!orangeDist.isObjectDetected() || orangeDist.objectDistance(distanceUnits::cm) > 4){
     leftDrive.spin(reverse, 10, pct);
     rightDrive.spin(reverse, 10, pct);
   }
@@ -39,75 +61,72 @@ void skills(){
   wait(0.15, sec);
   clawLiftBackL.close();
   clawLiftBackR.open();
-  forwardPID(300, 200);
-  turnLeft(-90, 150);
+  turnLeft(-88, 150);
   clawLiftFrontL.open();
   clawLiftFrontR.open();
   wait(0.35, sec);
   clawFront.close();
-  backwardPID(200, 150);
-  clawLiftFrontL.open();
-  clawLiftFrontR.close();
-  turnRight(-1.5, 150);
-  clawFront.open();
-  intakeB.spin(fwd,100, pct);
-  leftDrive.spin(reverse, 33, pct);
-  rightDrive.spin(reverse, 33, pct);
-  wait(2000,msec);
-  leftDrive.spin(reverse, 10, pct);
-  rightDrive.spin(reverse, 10, pct);
-  while(fabs(leftDrive.velocity(pct)) > 5 && fabs(rightDrive.velocity(pct)) > 5);
-  stopDrive(coast);
-  clawFront.close();
+  backwardPID(160, 150);
+  intakeF.stop(hold);
   clawLiftFrontL.close();
   clawLiftFrontR.open();
-  forwardPID(3720, 200, 50, 4.5);
-  turnLeft(-119, 250);
-  while(!blueDist.isObjectDetected() || blueDist.objectDistance(distanceUnits::cm) > 4){
-    leftDrive.spin(fwd, 25, pct);
-    rightDrive.spin(fwd, 25, pct);
-  }
-  stopDrive(coast);
+  turnRight(0, 150);
   clawFront.open();
-  wait(250, msec);
-  clawLiftFrontL.open();
-  clawLiftFrontR.close();
-  backwardPID(1000);
-  turnRight(-90);
-  backwardPID(2700,400, 50, 4);
-  intakeB.spin(fwd, 100, pct);
   leftDrive.spin(reverse, 10, pct);
   rightDrive.spin(reverse, 10, pct);
   wait(1000,msec);
   while(fabs(leftDrive.velocity(pct)) > 3 && fabs(rightDrive.velocity(pct)) > 3);
   stopDrive(coast);
-  turnLeft(-200, 150);
-  wait(250,msec);
-  forwardPID(110, 120);
-  wait(250,msec);
-  turnRight(-183, 120);
-  wait(250,msec);
-  turnLeft(-183, 120);
-  flip.spin(reverse, 50, pct);
+  clawFront.close();
+  forwardPID(3780, 130, 50, 1.4);
+  turnLeft(-117.5, 120);
+  while(!blueDist.isObjectDetected() || blueDist.objectDistance(distanceUnits::cm) > 4){
+    leftDrive.spin(fwd, 25, pct);
+    rightDrive.spin(fwd, 25, pct);
+  }
+  intakeB.stop(hold);
+  stopDrive(coast);
+  clawFront.open();
+  wait(150, msec);
+  clawLiftFrontL.open();
+  clawLiftFrontR.close();
+  backwardPID(900, 200);
+  intakeF.spin(fwd, 100, pct);
+  turnRight(-95, 100, 40);
+  wait(150,msec);
+  backwardPID(2500,130, 50, 2);
+  leftDrive.spin(reverse, 15, pct);
+  rightDrive.spin(reverse, 15, pct);
+  wait(1000,msec);
+  while(fabs(leftDrive.velocity(pct)) > 3 && fabs(rightDrive.velocity(pct)) > 3);
+  stopDrive(coast);
+  turnLeft(-195, 150);
+  flip.spin(reverse, 100, pct);
+  wait(150,msec);
+  forwardPID(150, 120);
   wait(300,msec);
   while(fabs(flip.velocity(pct)) > 5);
   flip.spin(reverse, 10, pct);
-  leftDrive.rotateFor(2550, deg, 100, percent, false);
-  rightDrive.rotateFor(2550, deg, 100, percent);
+  wait(150,msec);
+  turnRight(-189, 120);
+  leftDrive.rotateFor(2620, deg, 100, percent, false);
+  rightDrive.rotateFor(2620, deg, 100, percent);
   wait(2000, msec);
+  flip.stop(hold);
   clawLiftBackL.open();
   clawLiftBackR.open();
   clawLiftFrontL.open();
   clawLiftFrontR.open();
-  wait(0.5, sec);
+  wait(0.7, sec);
   clawBack.close();
   clawFront.close();
-  wait(0.35, sec);
+  wait(0.7, sec);
   clawLiftBackL.close();
   clawLiftBackR.open();
   clawLiftFrontL.open();
   clawLiftFrontR.close();
-  wait(0.35, msec);
+  wait(0.7, msec);
   clawBack.open();
   clawFront.open();
+  std::cout << Brain.timer(seconds) << std::endl;
 }

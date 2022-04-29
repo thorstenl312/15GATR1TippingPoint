@@ -91,10 +91,10 @@ int gripperControl(){
       clawLiftFrontR.open();
       wait(0.5, sec);
       clawFront.close();
-      wait(0.35, sec);
+      wait(0.5, sec);
       clawLiftFrontL.open();
       clawLiftFrontR.close();
-      wait(0.35, msec);
+      wait(0.5, msec);
       clawFront.open();
       while(Controller2.ButtonA.pressing());
     }
@@ -103,10 +103,10 @@ int gripperControl(){
       clawLiftBackR.open();
       wait(0.5, sec);
       clawBack.close();
-      wait(0.35, sec);
+      wait(0.5, sec);
       clawLiftBackL.close();
       clawLiftBackR.open();
-      wait(0.35, msec);
+      wait(0.5, msec);
       clawBack.open();
       while(Controller2.ButtonY.pressing());
     }

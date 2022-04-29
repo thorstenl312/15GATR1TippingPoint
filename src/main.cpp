@@ -28,7 +28,7 @@ void pre_auton(void) {
   clawFront.open();
   clawLiftFrontL.open();
   clawLiftFrontR.close();
-  clawLiftBackL.open();
+  clawLiftBackL.close();
   clawLiftBackR.open();
   vexcodeInit();
   inert.calibrate();
@@ -44,12 +44,13 @@ void pre_auton(void) {
 
 void autonomous(void) {
   if(skillsB) skills();
-  else matchAuto();
+  else middleAuto();
 }
 
 
 void usercontrol(void) {
   // User control code here, inside the loop
+  bool holding = false;
   task grip(gripperControl);
   if(skillsB){
     clawLiftFrontL.close();
@@ -62,6 +63,7 @@ void usercontrol(void) {
     clawFront.open();
     clawLiftFrontL.open();
     clawLiftFrontR.close();
+    stopDrive(coast);
   }
   else{
     clawLiftFrontL.open();
@@ -80,6 +82,19 @@ void usercontrol(void) {
     if(fabs(curvedY) < 10) curvedY = 0;
     leftDrive.spin(fwd, curvedY + (curvedX*0.3), pct);
     rightDrive.spin(fwd, curvedY - (curvedX*0.3), pct);
+    if(Controller1.ButtonLeft.pressing()){
+      if(!holding){
+        leftDrive.setStopping(hold);
+        rightDrive.setStopping(hold);
+        holding = !holding;
+      }
+      else{
+        leftDrive.setStopping(coast);
+        rightDrive.setStopping(coast);
+        holding = !holding;
+      }
+      while(Controller1.ButtonLeft.pressing());
+    }
     if(Controller2.ButtonR1.pressing() || Controller1.ButtonR2.pressing()){
       intakeF.spin(fwd, 100, pct);
       intakeB.spin(fwd, 100, pct);

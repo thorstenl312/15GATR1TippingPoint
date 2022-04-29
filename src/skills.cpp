@@ -3,22 +3,22 @@
 
 
 int fixIntake(){
-  intakeB.spin(fwd, 100,pct);
-  intakeF.spin(fwd, 100, pct);
+  intakeB.spin(fwd, 90,pct);
+  intakeF.spin(fwd, 90, pct);
   wait(500,msec);
   while(true){
-    intakeB.spin(fwd, 100,pct);
-    intakeF.spin(fwd, 100, pct);
+    intakeB.spin(fwd, 90,pct);
+    intakeF.spin(fwd, 90, pct);
     if(intakeB.velocity(pct) < 5){
       intakeB.spin(reverse,50,pct);
       wait(350,msec);
-      intakeB.spin(fwd, 100, pct);
+      intakeB.spin(fwd, 90, pct);
       wait(1000,msec);
     }
     if(intakeF.velocity(pct) < 5){
       intakeF.spin(reverse,50,pct);
       wait(350,msec);
-      intakeF.spin(fwd, 100, pct);
+      intakeF.spin(fwd, 90, pct);
       wait(1000,msec);
     }
   }
@@ -90,7 +90,7 @@ void skills(){
   wait(150, msec);
   clawLiftFrontL.open();
   clawLiftFrontR.close();
-  backwardPID(900, 200);
+  backwardPID(930, 200);
   intakeF.spin(fwd, 100, pct);
   turnRight(-95, 100, 40);
   wait(150,msec);

@@ -36,7 +36,7 @@ void skills(){
   }
   stopDrive(coast);
   clawFront.open();
-  wait(150,msec);
+  wait(250,msec);
   clawLiftFrontL.open();
   clawLiftFrontR.close();
   while(inert.rotation() <= 83){
@@ -48,7 +48,7 @@ void skills(){
   task f(fixIntake);
   backwardPID(2350, 130, 50, 1.5);
   turnRight(112, 150);
-  backwardPID(905, 200, 50, 4);
+  backwardPID(910, 200, 50, 4);
   clawLiftBackL.open();
   clawLiftBackR.close();
   turnLeft(0, 200,30);
@@ -58,7 +58,7 @@ void skills(){
   }
   stopDrive(coast);
   clawBack.open();
-  wait(0.15, sec);
+  wait(0.25, sec);
   clawLiftBackL.close();
   clawLiftBackR.open();
   turnLeft(-88, 150);
@@ -87,10 +87,10 @@ void skills(){
   intakeB.stop(hold);
   stopDrive(coast);
   clawFront.open();
-  wait(150, msec);
+  wait(250, msec);
   clawLiftFrontL.open();
   clawLiftFrontR.close();
-  backwardPID(930, 200);
+  backwardPID(920, 200);
   intakeF.spin(fwd, 100, pct);
   turnRight(-95, 100, 40);
   wait(150,msec);
@@ -103,7 +103,7 @@ void skills(){
   turnLeft(-195, 150);
   flip.spin(reverse, 100, pct);
   wait(150,msec);
-  forwardPID(150, 120);
+  forwardPID(170, 120);
   wait(300,msec);
   while(fabs(flip.velocity(pct)) > 5);
   flip.spin(reverse, 10, pct);
@@ -125,7 +125,7 @@ void skills(){
   clawLiftBackR.open();
   clawLiftFrontL.open();
   clawLiftFrontR.close();
-  wait(0.7, msec);
+  wait(1.14, msec);
   clawBack.open();
   clawFront.open();
   std::cout << Brain.timer(seconds) << std::endl;

@@ -30,20 +30,6 @@ void sideAuto(){
   wait(1000,msec);
   while(fabs(leftDrive.velocity(pct)) > 2 && fabs(rightDrive.velocity(pct)) > 2);
   stopDrive(coast);
-  // leftDrive.spin(reverse, 30, pct);
-  // rightDrive.spin(reverse, 30, pct);
-  // wait(270,msec);
-  // leftDrive.spin(reverse, 60, pct);
-  // rightDrive.spin(reverse, 60, pct);
-  // wait(270,msec);
-  // leftDrive.spin(reverse, 80, pct);
-  // rightDrive.spin(reverse, 80, pct);
-  // wait(270,msec);
-  // leftDrive.spin(reverse, 100, pct);
-  // rightDrive.spin(reverse, 100, pct);
-  // wait(220,msec);
-  // stopDrive(coast);
-  // while(leftDrive.velocity(pct) < -2 && rightDrive.velocity(pct) < -2);
   clawBack.close();
   forwardPID(825, 300);
   clawLiftBackL.open();
@@ -69,7 +55,7 @@ void sideAuto(){
   stopDrive(coast);
   intakeB.spin(fwd, 80, pct);
   forwardPID(175, 120);
-  turnRight(-1, 120);
+  turnRight(0, 120);
   intakeB.spin(fwd, 100, pct);
   forwardPID(1400,120, 50, 1, 60);
   backwardPID(1350,200);
@@ -82,9 +68,9 @@ void sideAuto(){
   wait(0.5, sec);
   backwardPID(400, 200);
   turnRight(-60, 150);
-  forwardPID(660, 200);
-  turnLeft(-85, 150);
-  forwardPID(550, 200);
+  forwardPID(670, 200);
+  turnLeft(-83, 150);
+  forwardPID(550, 150);
 
 }
 void middleAuto(){
@@ -93,11 +79,12 @@ void middleAuto(){
   clawLiftFrontL.close();
   clawLiftFrontR.open();
   leftDrive.spin(fwd, 100, pct);
-  rightDrive.spin(fwd, 109, pct);
-  wait(800, msec);
-  while(!blueDist.isObjectDetected() || !(blueDist.objectDistance(distanceUnits::cm) < 10.5)){
-    wait(20,msec);
-  }
+  rightDrive.spin(fwd, 100, pct);
+  wait(950, msec);
+  /*while(!blueDist.isObjectDetected() || blueDist.objectDistance(distanceUnits::cm) > 13){
+    std::cout << "DIST: " << blueDist.objectDistance(distanceUnits::cm) << std::endl;
+    wait(10,msec);
+  }*/
   task p(pullIn);
   stopDrive(brake);
   wait(250,msec);
@@ -110,33 +97,19 @@ void middleAuto(){
   stopDrive(coast);
   inert.resetHeading();
   inert.resetRotation();
-  // leftDrive.spin(reverse, 30, pct);
-  // rightDrive.spin(reverse, 30, pct);
-  // wait(270,msec);
-  // leftDrive.spin(reverse, 60, pct);
-  // rightDrive.spin(reverse, 60, pct);
-  // wait(270,msec);
-  // leftDrive.spin(reverse, 80, pct);
-  // rightDrive.spin(reverse, 80, pct);
-  // wait(270,msec);
-  // leftDrive.spin(reverse, 100, pct);
-  // rightDrive.spin(reverse, 100, pct);
-  // wait(220,msec);
-  // stopDrive(coast);
-  // while(leftDrive.velocity(pct) < -2 && rightDrive.velocity(pct) < -2);
   clawBack.close();
-  forwardPID(825, 300);
+  forwardPID(850, 300);
   clawLiftBackL.open();
   clawLiftBackR.close();
   turnLeft(-85, 110);
-  while(!orangeDist.isObjectDetected() || orangeDist.objectDistance(distanceUnits::cm) > 3){
+  while(!orangeDist.isObjectDetected() || orangeDist.objectDistance(distanceUnits::cm) > 4){
     leftDrive.spin(reverse, 20, pct);
     rightDrive.spin(reverse, 20, pct);
   }
   leftDrive.spin(reverse, 20, pct);
   rightDrive.spin(reverse, 20, pct);
   wait(500,msec);
-  while(fabs(leftDrive.velocity(pct)) > 2 && fabs(rightDrive.velocity(pct)) > 5);
+  while(fabs(leftDrive.velocity(pct)) > 5 && fabs(rightDrive.velocity(pct)) > 5);
   stopDrive(coast);
   // leftDrive.spin(reverse, 5, pct);
   // rightDrive.spin(reverse, 5, pct);
@@ -148,7 +121,7 @@ void middleAuto(){
   wait(0.5, sec);
   stopDrive(coast);
   intakeB.spin(fwd, 80, pct);
-  forwardPID(175, 120);
+  forwardPID(225, 120);
   turnRight(-1, 120);
   intakeB.spin(fwd, 100, pct);
   forwardPID(1400,120, 50, 1, 60);
@@ -156,9 +129,10 @@ void middleAuto(){
   //intakeB.stop(coast);
   turnLeft(-88, 120);
   forwardPID(800, 200);
-  clawFront.close();
-  clawLiftFrontL.close();
+  clawLiftFrontL.open();
   clawLiftFrontR.open();
+  wait(0.5, sec);
+  clawFront.close();
   wait(0.5, sec);
   backwardPID(400, 200);
   turnRight(-60, 150);

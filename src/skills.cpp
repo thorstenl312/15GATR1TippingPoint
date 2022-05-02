@@ -7,18 +7,18 @@ int fixIntake(){
   intakeF.spin(fwd, 90, pct);
   wait(500,msec);
   while(true){
-    intakeB.spin(fwd, 90,pct);
-    intakeF.spin(fwd, 90, pct);
+    intakeB.spin(fwd, 100,pct);
+    intakeF.spin(fwd, 100, pct);
     if(intakeB.velocity(pct) < 5){
-      intakeB.spin(reverse,50,pct);
+      intakeB.spin(reverse,60,pct);
       wait(350,msec);
-      intakeB.spin(fwd, 90, pct);
+      intakeB.spin(fwd, 100, pct);
       wait(1000,msec);
     }
     if(intakeF.velocity(pct) < 5){
-      intakeF.spin(reverse,50,pct);
+      intakeF.spin(reverse,60,pct);
       wait(350,msec);
-      intakeF.spin(fwd, 90, pct);
+      intakeF.spin(fwd, 100, pct);
       wait(1000,msec);
     }
   }
@@ -29,7 +29,7 @@ void skills(){
   clawBack.close();
   clawLiftFrontL.close();
   clawLiftFrontR.open();
-  wait(400,msec);
+  wait(500,msec);
   while(!blueDist.isObjectDetected() || blueDist.objectDistance(distanceUnits::cm) > 4){
     leftDrive.spin(fwd, 10, pct);
     rightDrive.spin(fwd, 10, pct);
@@ -41,8 +41,8 @@ void skills(){
   clawLiftFrontR.close();
   while(inert.rotation() <= 83){
     leftDrive.spin(reverse, 7, pct);
-    rightDrive.spin(reverse, 22 , pct);
-    if(inert.rotation() > 25)intakeF.spin(fwd,100, pct);
+    rightDrive.spin(reverse, 21 , pct);
+    if(inert.rotation() > 25)intakeF.spin(fwd,70, pct);
   }
   stopDrive(hold);
   task f(fixIntake);
@@ -51,7 +51,7 @@ void skills(){
   backwardPID(910, 200, 50, 4);
   clawLiftBackL.open();
   clawLiftBackR.close();
-  turnLeft(0, 200,30);
+  turnLeft(-1, 200,30);
   while(!orangeDist.isObjectDetected() || orangeDist.objectDistance(distanceUnits::cm) > 4){
     leftDrive.spin(reverse, 10, pct);
     rightDrive.spin(reverse, 10, pct);
@@ -79,7 +79,7 @@ void skills(){
   stopDrive(coast);
   clawFront.close();
   forwardPID(3780, 130, 50, 1.4);
-  turnLeft(-117.5, 120);
+  turnLeft(-116, 110);
   while(!blueDist.isObjectDetected() || blueDist.objectDistance(distanceUnits::cm) > 4){
     leftDrive.spin(fwd, 25, pct);
     rightDrive.spin(fwd, 25, pct);
@@ -90,7 +90,7 @@ void skills(){
   wait(250, msec);
   clawLiftFrontL.open();
   clawLiftFrontR.close();
-  backwardPID(920, 200);
+  backwardPID(950, 200);
   intakeF.spin(fwd, 100, pct);
   turnRight(-95, 100, 40);
   wait(150,msec);
@@ -103,14 +103,14 @@ void skills(){
   turnLeft(-195, 150);
   flip.spin(reverse, 100, pct);
   wait(150,msec);
-  forwardPID(170, 120);
+  forwardPID(190, 120);
   wait(300,msec);
   while(fabs(flip.velocity(pct)) > 5);
   flip.spin(reverse, 10, pct);
   wait(150,msec);
-  turnRight(-189, 120);
-  leftDrive.rotateFor(2620, deg, 100, percent, false);
-  rightDrive.rotateFor(2620, deg, 100, percent);
+  turnRight(-190, 120);
+  leftDrive.rotateFor(2650, deg, 100, percent, false);
+  rightDrive.rotateFor(2650, deg, 100, percent);
   wait(2000, msec);
   flip.stop(hold);
   clawLiftBackL.open();

@@ -20,8 +20,8 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
-bool skillsB = true;
-
+bool skillsB = false;
+int autoSelect = 1;
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   clawBack.open();
@@ -38,13 +38,23 @@ void pre_auton(void) {
   rotate.resetPosition();
   std::cout << "Done Calibrating" << std::endl;
   wait(500,msec);
+  while(true){
+    if(skillsB) Brain.Screen.printAt(20, 20, "Skills");
+    else if(autoSelect == 1) Brain.Screen.printAt(20, 20, "Middle Goal");
+    else Brain.Screen.printAt(20, 20, "Side Goal");
+    if(Brain.Screen.pressing()){
+      while(Brain.Screen.pressing());
+      (autoSelect%=1)++;
+    }
+  }
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
 
 void autonomous(void) {
   if(skillsB) skills();
-  else middleAuto();
+  else if(autoSelect == 1) middleAuto();
+  else sideAuto();
 }
 
 
